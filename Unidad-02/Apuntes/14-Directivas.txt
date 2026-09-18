@@ -1,0 +1,29 @@
+php.ini es el archivo principal de configuración de PHP.
+PHP lee estas directivas al arrancar y utiliza esos valores durante la ejecución.
+
+
+En XAMPP, normalmente estará en una ruta similar a:
+C:\xampp\php\php.ini
+
+Después de modificar php.ini, normalmente debes reiniciar Apache para que los cambios surtan efecto.
+
+Las directivas más importantes son:
+
+Directiva	            Para qué sirve	                                    Ejemplo
+display_errors	        Mostrar errores	                                    On
+error_reporting	        Qué errores mostrar/reportar	                    E_ALL
+log_errors	            Guardar errores en un log	                        On
+memory_limit	        Memoria máxima de un script	                        128M
+max_execution_time	    Tiempo máximo de ejecución	                        30
+post_max_size	        Tamaño máximo de datos POST	                        8M
+upload_max_filesize	    Tamaño máximo de un archivo subido	                2M
+max_input_vars	        Número máximo de variables de entrada	            1000
+max_input_time	        Tiempo para recibir datos de entrada	            -1
+session.gc_maxlifetime	Duración de datos de sesión	                        1440
+session.cookie_lifetime	Duración de la cookie de sesión	                    0
+date.timezone	        Zona horaria	                                    Europe/Madrid
+default_charset	        Codificación utilizada	                            UTF-8
+file_uploads	        Permitir subida de archivos	                        On
+allow_url_fopen	        Permitir abrir URLs mediante funciones de archivos	On
+extension_dir	        Directorio de extensiones	                        ruta
+zend_extension	        Carga extensiones como Xdebug	                    ruta
