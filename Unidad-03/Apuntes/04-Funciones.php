@@ -25,40 +25,21 @@ function miFun2() {
 $mensaje = miFun2();
 echo $mensaje;
 
-//Definicion de funcion con parametros
-function miFun3($nombre)
-{
-    echo "Hola $nombre, Esta funcion es con parametros. <br>";
-}
-// Llamada a la funcion con parametros
-miFun3("Pedro");
-
-// Definicion de funcion con parametros con valor por defecto
-function miFun4($nombre = "Invitado")
-{
-    echo "Hola $nombre, Esta funcion es con parametros y valor por defecto. <br>";
+// Definición de una función con parámetros
+function miFun3($nombre, $edad, $estudiante = true) { // Parámetro con valor por defecto
+    echo "¡Hola, $nombre!, tienes $edad  y eres $estudiante<br>";
 }
 
-// LLamada a la funcion con parametro con valor por defecto
-miFun4();
+// Llamada a la función con un argumento
+echo "-> ";
+miFun3("Pedro",18); // Se pasan tres argumentos, pero la función solo utiliza el primero
 
-//Definicion de funcion con mas de un parametro
-function miFun5($nombre, $edad, $estudiante = true)
-{
-    echo "Hola $nombre, tienes $edad años y eres $estudiante <br>";
+// Definición de una función con múltiples parámetros
+function miFun4($nombre) {
+    return "¡Hola, $nombre! Esta es una función con múltiples parámetros.<br>";
 }
 
-// LLamada a la funcion con mas de un parametro
-miFun5("Juan", 25, true);
-miFun5("Maria", 30);
-
-
-
-
-
-
-
-
-
-
+// Llamada a la función con un argumento y almacenamiento del valor devuelto
+$mensaje2 = miFun4("María");
+echo $mensaje2;
 ?>
