@@ -1,78 +1,64 @@
 <?php
 /*
-  5. Creación de tabla: 
-  Crea un formulario que pida dos números. Ambos tienen que valer 1 o más, de no ser así 
-  se indica el error. El resultado será una tabla (se mostrará en la misma página del 
-  formulario) con el tamaño indicado.
+Ejercicio 6. Crea un formulario que pida dos números. Ambos tienen que valer 1 o más, de no ser así se indica el error. El resultado será una tabla (se mostrará en la misma página del formulario) con el tamaño indicado 
 */
-
-// Inicializamos la variable donde guardaremos el mensaje de error (si lo hay)
-$error = "";
-
-// Comprobamos si el formulario se ha enviado por el método POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Recogemos los números enviados desde el formulario
-    $filas = $_POST['filas'];
-    $columnas = $_POST['columnas'];
-
-    // Comprobamos la condición: ambos deben valer 1 o más
-    if ($filas < 1 || $columnas < 1) {
-        $error = "Error: Ambos números deben ser mayores o iguales a 1.";
-    }
-}
+if($_SERVER["REQUEST_METHOD"] == "GET")
+{
+	//comprobamos si la página recibe los parámetros para dibujar la tabla
+    if(isset($_GET["enviar"])){
+		if(isset($_GET["columnas"]) && !empty($_GET["columnas"]) &&
+           isset($_GET["filas"]) && !empty($_GET["filas"])){
+			   $filas=$_GET["filas"];
+			   $columnas=$_GET["columnas"];
+			   if(is_numeric($filas) && is_numeric($columnas) &&
+                  $filas>1 && $columnas >1 ) 
+			   {
+				   $error = false;
+               } else {
+				   $error = true;
+               }// fi numeric
+         }//fi filas y columnas
+    }//fi enviar		 
+}//fi request_method
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejercicio 5 - Creación de tabla</title>
-</head>
-<body>
-
-    <h2>Generador de Tablas</h2>
-
-    <!-- Formulario que se envía a la misma página -->
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-        <label for="filas">Filas:</label>
-        <input type="number" id="filas" name="filas" required><br><br>
-
-        <label for="columnas">Columnas:</label>
-        <input type="number" id="columnas" name="columnas" required><br><br>
-
-        <input type="submit" value="Crear Tabla">
-    </form>
-
-    <hr>
-
-    <?php
-    // 1. Si hay un mensaje de error, lo mostramos en rojo
-    if (!empty($error)) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-
-    // 2. Si el formulario fue enviado por POST y NO hay error, mostramos la tabla
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
-        echo "<h3>Tabla de $filas x $columnas:</h3>";
-        
-        // Empezamos a dibujar la etiqueta <table>
-        echo "<table border='1' cellpadding='10'>";
-        
-        // Bucle externo para crear cada fila (<tr>)
-        for ($f = 1; $f <= $filas; $f++) {
-            echo "<tr>";
-            
-            // Bucle interno para crear las celdas de la fila (<td>)
-            for ($c = 1; $c <= $columnas; $c++) {
-                echo "<td>Fila $f, Col $c</td>";
-            }
-            
-            echo "</tr>";
-        }
-        
-        echo "</table>";
-    }
-    ?>
-
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <title>Ejercicio 5</title> 
+   </head>
+   <body>
+      <?php
+	    if(isset($error) && $error)
+		{
+	  ?>
+	  <p style="color:red;">Los datos no son correctos, no puedo hacer la tabla</p>
+      <?php	  
+		}	
+	  ?>
+      <form action="<?= $_SERVER["PHP_SELF"];?>" method="get">
+         <label for="columnas" id="lblColumnas">Escriba el número de columnas </label>
+         <input type="number" id="columnas" name="columnas" ><br/>
+         <label for="filas" id="lblFilas">Escriba el número de filas </label>
+         <input type="number" id="filas" name="filas" ><br/>
+         <input type="submit" id="enviar" name="enviar">
+      </form>
+	  <?php
+	     if(isset($error) && ($error==false))
+		 {
+			 //los datos son correctos,  dibujamos la tabla
+			 echo '<table>';
+			 for ($i=1;$i<=$filas;$i++): //pinta las filas
+				 echo '<tr>';
+				 for ($j=1;$j<=$columnas;$j++){ //pinta las columnas
+					 //en cada celda escribimos un espacio en blanco 
+					 // para asegurar que se muestre la tabla
+					 echo '<td style="border: 1px solid black;">&nbsp;</td>';
+				 }//for columnas
+                 echo '</tr>';
+			  endfor;//for filas
+              echo '</table>';
+		 }	 	 
+	  ?>
+   </body>
 </html>

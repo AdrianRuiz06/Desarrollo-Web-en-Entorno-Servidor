@@ -25,15 +25,12 @@ $articulos = [
 
     <h2>Tienda Online - Selección de Artículos</h2>
 
-    <!-- Formulario autoprocesado por POST -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <p>Selecciona los productos que deseas comprar:</p>
 
         <?php
-        // Recorremos el array para generar automáticamente los checkboxes
         foreach ($articulos as $nombre => $precio) {
             echo "<label>";
-            // Usamos un array seleccionados[] en el name del input para enviar varios valores
             echo "<input type='checkbox' name='seleccionados[]' value='$nombre'> ";
             echo "$nombre - " . number_format($precio, 2, ',', '.') . " €";
             echo "</label><br><br>";
@@ -46,10 +43,8 @@ $articulos = [
     <hr>
 
     <?php
-    // Comprobamos si el formulario se ha enviado por POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        // Verificamos si se ha seleccionado al menos un artículo
         if (isset($_POST['seleccionados']) && !empty($_POST['seleccionados'])) {
             
             $seleccionados = $_POST['seleccionados'];
@@ -58,9 +53,7 @@ $articulos = [
             echo "<h3>Detalle de la compra:</h3>";
             echo "<ul>";
 
-            // Recorremos únicamente los elementos marcados por el usuario
             foreach ($seleccionados as $item) {
-                // Si el producto seleccionado existe en nuestro catálogo, sumamos su precio
                 if (array_key_exists($item, $articulos)) {
                     $precioItem = $articulos[$item];
                     $total += $precioItem;
@@ -72,7 +65,6 @@ $articulos = [
             echo "<h3>Total a pagar: " . number_format($total, 2, ',', '.') . " €</h3>";
 
         } else {
-            // Si no marcó ningún checkbox al enviar
             echo "<p style='color: red;'>No has seleccionado ningún artículo de la lista.</p>";
         }
     }
