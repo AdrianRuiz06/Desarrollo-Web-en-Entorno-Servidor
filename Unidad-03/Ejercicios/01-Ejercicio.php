@@ -1,28 +1,35 @@
-<?php
-/*
-  Ejercicio 1: Crea una página PHP que muestre los números del 1 al 1000 
-  pero de forma que aparezcan en 5 columnas y se lean de izquierda a derecha.
-*/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Tabla del 1 al 1000</title>
+    <style>
 
-echo "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center;'>";
+        td {
+            border: 1px solid #333;
+        }
 
-// Bucle para iterar del 1 al 1000
-for ($i = 1; $i <= 1000; $i++) {
-    
-    // Si es el primer elemento de la fila (1, 6, 11...), abrimos la etiqueta <tr>
-    if ($i % 5 == 1) {
-        echo "<tr>";
-    }
+    </style>
+</head>
+<body>
+    <table>
+        <?php for ($i = 1; $i <= 1000; $i++): ?>
+            
+            <!-- Abrimos fila en los múltiplos de 5 + 1 (1, 6, 11...) -->
+            <?php if ($i % 5 == 1): ?>
+                <tr>
+            <?php endif; ?>
 
-    // Mostramos la celda con el número actual
-    echo "<td>$i</td>";
+            <td><?= $i ?></td>
 
-    // Si es el último elemento de la fila (5, 10, 15... divisible por 5), cerramos la etiqueta </tr>
-    if ($i % 5 == 0) {
-        echo "</tr>";
-    }
-}
+            <!-- Cerramos fila cada 5 elementos -->
+            <?php if ($i % 5 == 0): ?>
+                </tr>
+            <?php endif; ?>
 
-echo "</table>";
+        <?php endfor; ?>
+    </table>
 
-?>
+</body>
+</html>

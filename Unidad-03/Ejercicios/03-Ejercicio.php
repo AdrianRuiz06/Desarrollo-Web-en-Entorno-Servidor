@@ -1,33 +1,37 @@
-<?php
-/*
-  Ejercicio 3: Crear una página PHP que muestre por pantalla todo el código ASCII 
-  en una tabla de 16 columnas. Como pista, la función chr recibe un número y 
-  muestra el código ASCII equivalente. Así chr(65) muestra el carácter A.
-*/
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - Tabla del Código ASCII</title>
+    <style>
+        td {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
 
-echo "<h2>Tabla del Código ASCII (0-255)</h2>";
-echo "<table border='1' cellpadding='5' style='border-collapse: collapse; text-align: center;'>";
+    <table>
+        <?php for ($i = 0; $i <= 255; $i++): ?>
 
-// El código ASCII estándar y extendido abarca del 0 al 255
-for ($i = 0; $i <= 255; $i++) {
+            <!-- Abrimos fila <tr> al inicio de cada bloque de 16 columnas -->
+            <?php if ($i % 16 == 0): ?>
+                <tr>
+            <?php endif; ?>
 
-    // Si es el primer elemento de la fila, abrimos <tr>
-    if ($i % 16 == 0) {
-        echo "<tr>";
-    }
+            <td>
+                <small><?= $i ?></small><br>
+                <strong><?= htmlspecialchars(chr($i)) ?></strong>
+            </td>
 
-    // Mostramos el valor numérico y su carácter equivalente con chr()
-    echo "<td>";
-    echo "<small style='color: gray;'>$i</small><br>";
-    echo "<strong>" . htmlspecialchars(chr($i)) . "</strong>";
-    echo "</td>";
+            <!-- Cerramos fila </tr> al llegar a la última columna de la fila -->
+            <?php if ($i % 16 == 15): ?>
+                </tr>
+            <?php endif; ?>
 
-    // Si llegamos al final de la fila (16 columnas), cerramos </tr>
-    if ($i % 16 == 15) {
-        echo "</tr>";
-    }
-}
+        <?php endfor; ?>
+    </table>
 
-echo "</table>";
-
-?>
+</body>
+</html>
