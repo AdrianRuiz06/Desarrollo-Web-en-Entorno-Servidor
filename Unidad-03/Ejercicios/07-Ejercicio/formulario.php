@@ -24,7 +24,7 @@
         <label for="telefono">Teléfono:</label><br>
         <input type="text" id="telefono" name="telefono" required><br><br>
 
-        <input type="submit" value="Validar Datos">
+        <input type="submit" name="enviar" value="Validar Datos">
     </form>
 
 </body>
