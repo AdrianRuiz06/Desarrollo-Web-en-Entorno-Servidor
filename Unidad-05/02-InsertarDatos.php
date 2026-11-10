@@ -18,6 +18,13 @@ $conn = mysqli_connect($host, $username, $password, $dbname);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully.<br><br>";
+
+// 3. Inisertamos una Tupla en BD
+$query = "INSERT INTO `usuarios`(`usuario`, `contrasenia`, `rol`) VALUES ('userPHP','1234','php')";
+$result = mysqli_query($conn, $query);
+var_dump($result)"<br>";
+
+// 4. Cerrar la conexión
+mysqli_close($conn);
 
 ?>
